@@ -4,7 +4,7 @@ import Index from 'pages/index';
 import Auth from 'pages/auth';
 
 const AppRouter = () => {
-  const [isLoggedIn, setLoggedIn] = useState<Boolean>(true);
+  const [isLoggedIn, setLoggedIn] = useState<Boolean>(false);
   return (
     <Router>
       <Switch>
@@ -13,7 +13,7 @@ const AppRouter = () => {
             <Route exact path="/" component={Index} />
           </>
         ) : (
-          <Route path="/auth" component={Auth} />
+          <Route exact path="/" component={Auth} />
         )}
       </Switch>
     </Router>

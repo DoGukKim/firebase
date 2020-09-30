@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 type Props = {
   children?: ReactNode;
@@ -8,12 +8,12 @@ type Props = {
 
 const Layout = ({ children, title }: Props) => {
   return (
-    <>
-      {/* <Helmet>
+    <HelmetProvider>
+      <Helmet>
         <title>{title}</title>
-      </Helmet> */}
+      </Helmet>
       {children}
-    </>
+    </HelmetProvider>
   );
 };
 
