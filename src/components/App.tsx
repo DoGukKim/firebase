@@ -1,5 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -15,8 +17,15 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
+const GlobalStyle = createGlobalStyle`
+${reset}`;
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <GlobalStyle />
+    </>
+  );
 }
 
 export default App;
