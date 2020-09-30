@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import AppRouter from 'components/Router';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -24,6 +25,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <AppRouter />
     </>
   );
 }
