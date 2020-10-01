@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-
+export const Auth = styled.section`
+  padding: 0 20px;
+`;
 export const Form = styled.form``;
 export const SubmitBtn = styled.button`
   width: 100%;

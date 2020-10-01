@@ -1,12 +1,15 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { Form, SubmitBtn } from './Auth.styled';
+import firebase from 'firebase';
+
+import { Auth, Form, SubmitBtn } from './Auth.styled';
 import Input from 'components/Input';
 
 type Props = {};
 
 const AuthContainer: React.FC<Props> = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [newAccount, setNewAccount] = useState<boolean>(true);
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
@@ -17,11 +20,27 @@ const AuthContainer: React.FC<Props> = () => {
       setPassword(value);
     }
   };
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    try {
+      let data;
+      if (newAccount) {
+        // create account
+        data = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password);
+      } else {
+        // log in
+        data = await firebase
+          .auth()
+          .signInWithEmailAndPassword(email, password);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
-    <>
+    <Auth>
       <Form onSubmit={onSubmit}>
         <Input
           name="email"
@@ -41,9 +60,11 @@ const AuthContainer: React.FC<Props> = () => {
           onChange={onChange}
           required
         />
-        <SubmitBtn type="submit">Submit</SubmitBtn>
+        <SubmitBtn type="submit">
+          {newAccount ? 'Create Account' : 'Log In'}
+        </SubmitBtn>
       </Form>
-    </>
+    </Auth>
   );
 };
 

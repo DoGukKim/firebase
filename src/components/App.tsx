@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
 
 import { createGlobalStyle } from 'styled-components';
@@ -24,11 +24,22 @@ ${reset}`;
 
 function App() {
   const auth = firebase.auth();
-  const [isLoggedIn, setLoggedIn] = useState<any>(auth.currentUser);
+  const [init, setInit] = useState<boolean>(false);
+  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+      }
+      setInit(true);
+    });
+  }, []);
   return (
     <>
       <GlobalStyle />
-      <AppRouter isLoggedIn={isLoggedIn} />
+      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : 'loading now'}
     </>
   );
 }
