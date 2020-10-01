@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import firebase from 'firebase';
+
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import AppRouter from 'components/Router';
@@ -22,10 +23,12 @@ const GlobalStyle = createGlobalStyle`
 ${reset}`;
 
 function App() {
+  const auth = firebase.auth();
+  const [isLoggedIn, setLoggedIn] = useState<any>(auth.currentUser);
   return (
     <>
       <GlobalStyle />
-      <AppRouter />
+      <AppRouter isLoggedIn={isLoggedIn} />
     </>
   );
 }
