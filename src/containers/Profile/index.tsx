@@ -1,11 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-const ProfileContainer = () => {
-  return <Wrap>Im profile</Wrap>;
+import { Wrap, InputBtn } from './Profile.styled';
+
+type Props = {};
+
+const ProfileContainer: React.FC<Props> = () => {
+  return (
+    <Wrap>
+      <InputBtn>Log out</InputBtn>
+    </Wrap>
+  );
 };
 
 export default ProfileContainer;
-
-const Wrap = styled.div`
-  padding: 60px 0 0;
-`;

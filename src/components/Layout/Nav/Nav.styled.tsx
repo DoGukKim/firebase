@@ -12,7 +12,9 @@ export const Navigation = styled.nav`
 `;
 export const NavList = styled.ul`
   display: flex;
+  justify-content: space-around;
   align-items: center;
+  width: 100%;
 `;
 export const NavItem = styled.li``;
 export const NavLink = styled(Link)``;

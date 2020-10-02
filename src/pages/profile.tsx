@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from 'components/Layout/index';
 import ProfileContainer from 'containers/Profile';
-import styled from 'styled-components';
 
 const IndexPage = () => {
   return (
