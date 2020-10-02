@@ -13,4 +13,18 @@ export const InputBtn = styled.button`
   background: #fff;
   outline: none;
 `;
-export const SocialLoginBox = styled.div``;
+export const SocialLoginBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0 0;
+`;
+export const SocialLoginBtn = styled.button`
+  width: 47%;
+  height: 48px;
+  color: #1da1f2;
+  border: 0;
+  border-radius: 0.375em;
+  background: #fff;
+  outline: none;
+`;

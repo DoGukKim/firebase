@@ -55,6 +55,7 @@ type Props = {
   variant?: any;
   name?: string;
   required?: boolean;
+  autoComplete?: string;
 };
 
 const Input: React.FC<Props> = (props) => {
