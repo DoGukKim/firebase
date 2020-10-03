@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
+import firebaseDatabase from 'firebase/database';
 
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
