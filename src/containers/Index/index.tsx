@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Wrap, Form, Input } from './Index.styled';
 import { firestore } from 'firebase';
+import TweetComponent from 'components/Tweet';
 
 type Props = {
   userObj?: any;
@@ -66,7 +67,11 @@ const IndexContainer: React.FC<Props> = ({ userObj }) => {
       </Form>
       <div>
         {tweets.map((tweet: any) => (
-          <div key={tweet.id}>{tweet.text}</div>
+          <TweetComponent
+            key={tweet.id}
+            tweetObj={tweet}
+            isOwner={tweet.creatorId === userObj.uid}
+          />
         ))}
       </div>
     </Wrap>
