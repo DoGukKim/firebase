@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
-import firebaseDatabase from 'firebase/database';
 
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
@@ -27,10 +26,13 @@ function App() {
   const auth = firebase.auth();
   const [init, setInit] = useState<boolean>(false);
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+  const [userObj, setUserObj] = useState<any>(null);
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setLoggedIn(true);
+        setUserObj(user);
       } else {
         setLoggedIn(false);
       }
@@ -40,7 +42,11 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : 'loading now'}
+      {init ? (
+        <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
+      ) : (
+        'loading now'
+      )}
     </>
   );
 }

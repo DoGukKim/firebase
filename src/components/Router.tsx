@@ -8,16 +8,19 @@ import Profile from 'pages/profile';
 
 type Props = {
   isLoggedIn?: any;
+  userObj?: any;
 };
 
-const AppRouter: React.FC<Props> = ({ isLoggedIn }) => {
+const AppRouter: React.FC<Props> = ({ isLoggedIn, userObj }) => {
   return (
     <Router>
       {isLoggedIn && <Nav />}
       <Switch>
         {isLoggedIn ? (
           <>
-            <Route exact path="/" component={Index} />
+            <Route exact path="/">
+              <Index userObj={userObj} />
+            </Route>
             <Route exact path="/profile" component={Profile} />
           </>
         ) : (
