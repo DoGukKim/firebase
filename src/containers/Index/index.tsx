@@ -9,19 +9,31 @@ type Props = {
 const IndexContainer: React.FC<Props> = ({ userObj }) => {
   const [tweet, setTweet] = useState<string>('');
   const [tweets, setTweets] = useState<any>([]);
-  const getTweets = async () => {
-    const dbTweets = await firestore().collection('tweets').get();
-    dbTweets.forEach((document) => {
-      const tweetObject = {
-        ...document.data(),
-        id: document.id,
-      };
-      setTweets((prev: any) => [tweetObject, ...prev]);
-    });
-  };
+
+  /* useing forEach Not Real time */
+  // const getTweets = async () => {
+  //   const dbTweets = await firestore().collection('tweets').get();
+  //   dbTweets.forEach((document) => {
+  //     const tweetObject = {
+  //       ...document.data(),
+  //       id: document.id,
+  //     };
+  //     setTweets((prev: any) => [tweetObject, ...prev]);
+  //   });
+  // };
 
   useEffect(() => {
-    getTweets();
+    // getTweets();
+    /* useing firebase snapshot for real time */
+    firestore()
+      .collection('tweets')
+      .onSnapshot((snapshot) => {
+        const tweetArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setTweets(tweetArray);
+      });
   }, []);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -54,7 +66,7 @@ const IndexContainer: React.FC<Props> = ({ userObj }) => {
       </Form>
       <div>
         {tweets.map((tweet: any) => (
-          <div key={tweet.id}>{tweet.tweet}</div>
+          <div key={tweet.id}>{tweet.text}</div>
         ))}
       </div>
     </Wrap>
